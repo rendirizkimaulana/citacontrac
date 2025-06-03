@@ -221,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               echo "<div class='col'>";
               echo "<div class='form-check p-3 rounded border shadow-sm bg-light h-100'>";
               echo "<input class='form-check-input me-2' type='radio' name='q" . $row['id'] . "' id='$inputId' value='$key' required>";
-              echo "<label class='form-check-label w-100' for='$inputId'>" . htmlspecialchars($val) . "</label>";
+              echo "<label class='form-check-label w-100' for='$inputId'><strong>" . strtoupper($key) . ".</strong> " . htmlspecialchars($val) . "</label>";
               echo "</div>";
               echo "</div>";
             }
