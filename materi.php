@@ -8,7 +8,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $role = $_SESSION['role'];
-$username = $_SESSION['username'];
+$username = htmlspecialchars($_SESSION['username']);
 
 if ($role === 'admin' && isset($_POST['tambah'])) {
   $judul = mysqli_real_escape_string($conn, $_POST['judul']);
@@ -34,31 +34,31 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Materi Pelatihan - PT Citacontrac</title>
-  
-  <!-- Bootstrap CSS -->
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- AOS Animation -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  
+
   <style>
-    body {
-      background: #f8f9fa;
-      min-height: 100vh;
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: #f0f4f8;
     }
-    h2 {
-      color: #004aad;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    main.content {
+      flex: 1 0 auto;
+      padding-bottom: 2rem;
     }
-    .btn-primary {
-      background: linear-gradient(45deg, #0056b3, #007bff);
-      border: none;
-      transition: background 0.3s ease;
+    footer {
+      flex-shrink: 0;
     }
-    .btn-primary:hover {
-      background: linear-gradient(45deg, #007bff, #0056b3);
+    /* Navbar */
+    .navbar-brand {
+      font-weight: 700;
     }
+    /* Card styling */
     .card {
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -67,6 +67,20 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+    h2 {
+      color: #0d6efd;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px rgba(13, 110, 253, 0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, #0056b3, #007bff);
+      border: none;
+      transition: background 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #007bff, #0056b3);
     }
     textarea.form-control {
       resize: vertical;
@@ -81,6 +95,7 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
     .welcome-text {
       color: #333;
       margin-bottom: 1rem;
+      text-align: center;
     }
     .form-label {
       font-weight: 600;
@@ -90,38 +105,68 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
 </head>
 <body>
 
-<div class="container mt-5 mb-5">
-  <h2 class="mb-4 text-center">Materi Pelatihan</h2>
-  <p class="welcome-text text-center">Selamat datang, <strong><?= htmlspecialchars($username) ?></strong> (<?= htmlspecialchars($role) ?>)</p>
-  
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+  <div class="container">
+    <a class="navbar-brand" href="beranda.php">PT.Citacontrac</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+      aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <?php if ($role === 'admin') : ?>
+          <li class="nav-item"><a class="nav-link active" href="materi.php">Kelola Materi</a></li>
+          <li class="nav-item"><a class="nav-link" href="kelola_evaluasi.php">Kelola Evaluasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="lihat_hasil.php">Lihat Hasil</a></li>
+        <?php else : ?>
+          <li class="nav-item"><a class="nav-link" href="materi.php">Materi</a></li>
+          <li class="nav-item"><a class="nav-link" href="simulasi.php">Simulasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="evaluasi.php">Evaluasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="hasil.php">Hasil</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang</a></li>
+        <?php endif; ?>
+      </ul>
+
+      <div class="d-flex align-items-center text-white">
+        <i class="bi bi-person-circle fs-4 me-2"></i>
+        <span class="me-3"><?= $username ?></span>
+        <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="content container mt-5 mb-5" style="max-width:900px;">
+  <h2>Materi Pelatihan</h2>
+  <p class="welcome-text">Selamat datang, <strong><?= $username ?></strong> (<?= htmlspecialchars($role) ?>)</p>
+
   <div class="d-flex justify-content-between align-items-center mb-4">
     <a href="beranda.php" class="btn btn-outline-secondary">
       <i class="bi bi-arrow-left-circle"></i> Kembali ke Beranda
     </a>
-    <a href="logout.php" class="btn btn-outline-danger">
-      <i class="bi bi-box-arrow-right"></i> Logout
-    </a>
   </div>
 
   <?php if ($role === 'admin'): ?>
-  <div class="card mb-5 shadow-sm" data-aos="fade-up">
-    <div class="card-body">
-      <h5 class="card-title text-primary mb-3">Tambah Materi Baru</h5>
-      <form method="POST" autocomplete="off">
-        <div class="mb-3">
-          <label for="judul" class="form-label">Judul Materi</label>
-          <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul Materi" required>
-        </div>
-        <div class="mb-3">
-          <label for="isi" class="form-label">Isi Materi</label>
-          <textarea name="isi" id="isi" class="form-control" rows="6" placeholder="Isi materi..." required></textarea>
-        </div>
-        <button type="submit" name="tambah" class="btn btn-primary">
-          <i class="bi bi-plus-circle"></i> Tambah Materi
-        </button>
-      </form>
+    <div class="card mb-5 shadow-sm" data-aos="fade-up">
+      <div class="card-body">
+        <h5 class="card-title text-primary mb-3">Tambah Materi Baru</h5>
+        <form method="POST" autocomplete="off">
+          <div class="mb-3">
+            <label for="judul" class="form-label">Judul Materi</label>
+            <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul Materi" required>
+          </div>
+          <div class="mb-3">
+            <label for="isi" class="form-label">Isi Materi</label>
+            <textarea name="isi" id="isi" class="form-control" rows="6" placeholder="Isi materi..." required></textarea>
+          </div>
+          <button type="submit" name="tambah" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Tambah Materi
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
   <?php endif; ?>
 
   <?php if (mysqli_num_rows($result) == 0): ?>
@@ -151,20 +196,16 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
       <?php endwhile; ?>
     </div>
   <?php endif; ?>
+</main>
 
-</div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- AOS JS -->
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-      once: true,
-      duration: 800,
-      easing: 'ease-in-out'
-    });
+  AOS.init({
+    once: true,
+    duration: 800,
+    easing: 'ease-in-out'
   });
 </script>
 
