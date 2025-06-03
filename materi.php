@@ -140,7 +140,6 @@ $result = mysqli_query($conn, "SELECT * FROM materi ORDER BY created_at DESC");
 
 <main class="content container mt-5 mb-5" style="max-width:900px;">
   <h2>Materi Pelatihan</h2>
-  <p class="welcome-text">Selamat datang, <strong><?= $username ?></strong> (<?= htmlspecialchars($role) ?>)</p>
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <a href="beranda.php" class="btn btn-outline-secondary">
