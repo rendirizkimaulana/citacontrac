@@ -137,6 +137,42 @@ $role = $_SESSION['role'];
   </div>
 </section>
 
+<!-- Kontak & Lokasi -->
+<section class="py-5 bg-white" data-aos="fade-up">
+  <div class="container">
+    <h2 class="mb-4 text-center fw-bold">Kontak & Lokasi</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4">
+        <h5 class="fw-semibold"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Alamat</h5>
+        <p>MT. Haryono Square G Jl. Otista Raya<br>
+        RT 06 RW 12 Jakarta Timur, Indonesia<br>
+        Jl. Pinang Ranti No. 5 Jakarta Timur, Indonesia</p>
+
+        <h5 class="fw-semibold"><i class="bi bi-envelope-fill text-primary me-2"></i>Email</h5>
+        <p>citacontrac@yahoo.com</p>
+
+        <h5 class="fw-semibold"><i class="bi bi-telephone-fill text-success me-2"></i>Telepon</h5>
+        <p>(021) 8090623</p>
+      </div>
+      <div class="col-md-6">
+        <!-- GMaps Embed -->
+        <div class="ratio ratio-4x3 rounded shadow">
+          <iframe
+            src="https://www.google.com/maps?q=PV6J%2BG5%20Pinang%20Ranti,%20Jakarta%20Timur&output=embed"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3">
         <div class="container">

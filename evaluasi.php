@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       user-select: none;
     }
 
-    .form-check-input:checked+.form-check-label {
+    .form-check-input:checked + .form-check-label {
       color: #0d6efd;
       font-weight: 700;
     }
@@ -140,6 +140,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       text-align: center;
     }
 
+    /* Styling pilihan jawaban card */
+    .form-check {
+      transition: all 0.3s ease;
+    }
+
+    .form-check:hover {
+      background-color: #eaf1ff;
+      transform: scale(1.02);
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.15);
+    }
+
+    .form-check-input:checked + .form-check-label {
+      color: #0d6efd;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -188,23 +203,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows == 0) {
           echo "<p class='text-center text-muted'>Tidak ada soal evaluasi.</p>";
         } else {
+          $no = 1;
           while ($row = $result->fetch_assoc()) {
-            echo "<div class='mb-4'>";
-            echo "<p class='fw-semibold'>" . htmlspecialchars($row['soal']) . "</p>";
+            echo "<div class='mb-5'>";
+            echo "<h5 class='mb-3'><span class='badge bg-primary me-2'>$no.</span>" . htmlspecialchars($row['soal']) . "</h5>";
 
-            $options = ['a' => $row['pilihan_a'], 'b' => $row['pilihan_b'], 'c' => $row['pilihan_c'], 'd' => $row['pilihan_d']];
+            $options = [
+              'a' => $row['pilihan_a'],
+              'b' => $row['pilihan_b'],
+              'c' => $row['pilihan_c'],
+              'd' => $row['pilihan_d']
+            ];
+
+            echo "<div class='row row-cols-1 row-cols-md-2 g-3'>";
             foreach ($options as $key => $val) {
               $inputId = "q" . $row['id'] . $key;
-              echo "<div class='form-check'>";
-              echo "<input class='form-check-input' type='radio' name='q" . $row['id'] . "' id='$inputId' value='$key' required>";
-              echo "<label class='form-check-label' for='$inputId'>" . htmlspecialchars($val) . "</label>";
+              echo "<div class='col'>";
+              echo "<div class='form-check p-3 rounded border shadow-sm bg-light h-100'>";
+              echo "<input class='form-check-input me-2' type='radio' name='q" . $row['id'] . "' id='$inputId' value='$key' required>";
+              echo "<label class='form-check-label w-100' for='$inputId'>" . htmlspecialchars($val) . "</label>";
+              echo "</div>";
               echo "</div>";
             }
+            echo "</div>"; // End options row
             echo "</div><hr>";
+            $no++;
           }
         }
         ?>
-        <button type="submit" class="btn btn-primary" aria-label="Kirim Jawaban">
+        <button type="submit" class="btn btn-primary mt-4" aria-label="Kirim Jawaban">
           <i class="bi bi-check-circle me-2"></i> Kirim Jawaban
         </button>
       </form>
@@ -214,7 +241,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </a>
     </div>
   </main>
-
 
   <!-- Bootstrap JS dan dependencies Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

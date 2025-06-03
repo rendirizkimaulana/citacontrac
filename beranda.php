@@ -293,6 +293,9 @@ $role = $_SESSION['role'];
               <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 2" style="height: 140px; object-fit: cover;">
             </div>
             <div class="card shadow-sm" style="width: 200px; border-radius: 12px; overflow: hidden;">
+              <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 2" style="height: 140px; object-fit: cover;">
+            </div>
+            <div class="card shadow-sm" style="width: 200px; border-radius: 12px; overflow: hidden;">
               <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 3" style="height: 140px; object-fit: cover;">
             </div>
           </div>
@@ -303,6 +306,9 @@ $role = $_SESSION['role'];
           <div class="d-flex justify-content-center gap-4 flex-wrap">
             <div class="card shadow-sm" style="width: 200px; border-radius: 12px; overflow: hidden;">
               <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 4" style="height: 140px; object-fit: cover;">
+            </div>
+            <div class="card shadow-sm" style="width: 200px; border-radius: 12px; overflow: hidden;">
+              <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 5" style="height: 140px; object-fit: cover;">
             </div>
             <div class="card shadow-sm" style="width: 200px; border-radius: 12px; overflow: hidden;">
               <img src="img/tentang1.png" class="card-img-top" alt="Kerjasama 5" style="height: 140px; object-fit: cover;">
@@ -332,10 +338,10 @@ $role = $_SESSION['role'];
     <!-- Demo Video Simulasi -->
     <section class="py-5 bg-light" data-aos="zoom-in" data-aos-delay="200">
         <div class="container text-center">
-            <h2 class="mb-4 fw-bold">Demo Simulasi</h2>
+            <h2 class="mb-4 fw-bold">Cegah Kebakaran dengan Peduli Instalasi Listrik di Rumah</h2>
             <div class="ratio ratio-16x9 mx-auto" style="max-width:900px;">
                 <video controls preload="metadata" style="border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-                    <source src="videos/simulasi.mp4" type="video/mp4" />
+                    <source src="video/simulasi_pemasangan_meteran.mp4" type="video/mp4" />
                     Browser Anda tidak mendukung video HTML5.
                 </video>
             </div>
