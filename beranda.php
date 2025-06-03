@@ -122,6 +122,7 @@ $role = $_SESSION['role'];
           <li class="nav-item"><a class="nav-link" href="simulasi.php">Simulasi</a></li>
           <li class="nav-item"><a class="nav-link" href="evaluasi.php">Evaluasi</a></li>
           <li class="nav-item"><a class="nav-link" href="hasil.php">Hasil</a></li>
+          <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang</a></li>
         <?php endif; ?>
       </ul>
 
