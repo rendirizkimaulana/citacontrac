@@ -184,13 +184,20 @@ $role = $_SESSION['role'];
                     <?php endif; ?>
                 </ul>
 
-                <div class="d-flex align-items-center text-white">
-                    <i class="bi bi-person-circle fs-4 me-2"></i>
-                    <span class="me-3"><?= $username ?></span>
-                    <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-                </div>
-            </div>
-        </div>
+<div class="d-flex align-items-center text-white">
+    <i class="bi bi-person-circle fs-4 me-2"></i>
+    <div class="dropdown">
+        <a class="text-white text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <?= $username ?>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="profil.php">Profil Saya</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
+        </ul>
+    </div>
+</div>
+
     </nav>
 
     <!-- Hero Section -->
